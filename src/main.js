@@ -102,7 +102,22 @@ var quotes = [
 var savedPosters = [];
 var currentPoster;
 
+
+var posterImg = document.querySelector('poster-image-url')
+var posterTitle = document.querySelector('poster-title')
+var posterQuote = document.querySelector('poster-quote')
+var savePosterBtn = document.querySelector('save-poster')
+var showSavedBtn = document.querySelector('show-saved')
+var randomBtn = document.querySelector('show-random')
+var customBtn = document.querySelector('show-form')
 // event listeners go here 👇
+
+//savePosterBtn.addEventListener('click', )
+//showSavedBtn.addEventListener
+randomBtn.addEventListener('click', createPoster(getRandomIndex(images), getRandomIndex(titles), getRandomIndex(quotes)))
+
+//adding posters to the saved poster array? how
+
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -117,3 +132,20 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote}
 }
+// function to insert poster object into html display on page- dom- also make it the current poster
+ 
+function savePoster(poster) {
+
+}
+
+function showSavedPosters() {
+  
+}
+
+function displayPoster(poster) {
+    posterImg.innerHTML = poster.imageURL
+    posterTitle.innerHTML = poster.title
+    posterQuote.innerHTML = poster.quote
+  }
+
+console.log();
