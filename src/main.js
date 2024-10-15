@@ -113,7 +113,16 @@ var customBtn = document.querySelector('.show-form')
 
 var posterFormSection = document.querySelector('.poster-form')
 var showMainButton = document.querySelector('.show-main')
+var backButton = document.querySelector('.back-to-main')
+var makePosterButton = document.querySelector('.make-poster')
+
+var inputImageUrl = document.getElementById('poster-image-url')
+var inputTitle = document.getElementById('poster-title')
+var inputQuote = document.getElementById('poster-quote')
+
 var mainSection = document.querySelector('.main-poster')
+
+var savedPostersSection = document.querySelector('.saved-posters')
 // event listeners go here 👇
 
 //savePosterBtn.addEventListener('click', )
@@ -124,7 +133,12 @@ randomBtn.addEventListener('click', onClickRandomPoster)
 
 customBtn.addEventListener('click', onClickCustomPoster)
 
+showSavedBtn.addEventListener('click', onClickSavedPosters)
+
+makePosterButton.addEventListener('click', onClickMakePoster)
+
 showMainButton.addEventListener('click', onClickShowMainPage)
+backButton.addEventListener('click', onClickShowMainPage)
 //hide main poster class, show poster form class, add event handler for take me back button 
 
 
@@ -141,12 +155,32 @@ showMainButton.addEventListener('click', onClickShowMainPage)
 // function showSection(section){
 //   document.getElementsByClassName(section)
 // }
+function onClickMakePoster(event) {
+  event.preventDefault()
+  const posterDetails = {
+    id: Date.now(), 
+    imageURL: inputImageUrl.value, 
+    title: inputTitle.value, 
+    quote: inputQuote.value
+  }
+  currentPoster = posterDetails
+  displayPoster(currentPoster);
+  onClickShowMainPage()
+}
+
+
+function onClickSavedPosters() {
+  savedPostersSection.classList.remove('hidden')
+  mainSection.classList.add('hidden')
+}
+
 function onClickCustomPoster() {
   posterFormSection.classList.remove("hidden")
   mainSection.classList.add('hidden')
 }
 function onClickShowMainPage() {
   posterFormSection.classList.add("hidden")
+  savedPostersSection.classList.add('hidden')
   mainSection.classList.remove('hidden')
 }
 
@@ -183,6 +217,7 @@ function onClickRandomPoster() {
 
 // function to insert poster object into html display on page- dom- also make it the current poster
  
+
 function savePoster(poster) {
 
 }
