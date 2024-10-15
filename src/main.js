@@ -111,6 +111,9 @@ var showSavedBtn = document.querySelector('.show-saved')
 var randomBtn = document.querySelector('.show-random')
 var customBtn = document.querySelector('.show-form')
 
+var posterFormSection = document.querySelector('.poster-form')
+var showMainButton = document.querySelector('.show-main')
+var mainSection = document.querySelector('.main-poster')
 // event listeners go here 👇
 
 //savePosterBtn.addEventListener('click', )
@@ -118,7 +121,11 @@ var customBtn = document.querySelector('.show-form')
 
 
 randomBtn.addEventListener('click',  createPosterClickHandler(randomImage(), randomTitle(), randomQuote()))
-//display poster
+
+customBtn.addEventListener('click', onClickCustomPoster)
+
+showMainButton.addEventListener('click', onClickShowMainPage)
+//hide main poster class, show poster form class, add event handler for take me back button 
 
 
 //adding posters to the saved poster array? how
@@ -126,6 +133,23 @@ randomBtn.addEventListener('click',  createPosterClickHandler(randomImage(), ran
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
+
+// function hideSection(section){
+//   document.getElementsByClassName(section)
+// }
+
+// function showSection(section){
+//   document.getElementsByClassName(section)
+// }
+function onClickCustomPoster() {
+  posterFormSection.classList.remove("hidden")
+  mainSection.classList.add('hidden')
+}
+function onClickShowMainPage() {
+  posterFormSection.classList.add("hidden")
+  mainSection.classList.remove('hidden')
+}
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
