@@ -120,7 +120,7 @@ var mainSection = document.querySelector('.main-poster')
 //showSavedBtn.addEventListener
 
 
-randomBtn.addEventListener('click',  createPosterClickHandler(randomImage(), randomTitle(), randomQuote()))
+randomBtn.addEventListener('click', onClickRandomPoster)
 
 customBtn.addEventListener('click', onClickCustomPoster)
 
@@ -166,10 +166,8 @@ function randomQuote() {
   return quotes[getRandomIndex(quotes)]
 }
 
-
-function createPosterClickHandler() {
-  return () => {
-
+function onClickRandomPoster() {
+ 
     const posterDetails = {
       id: Date.now(), 
       imageURL: randomImage(), 
@@ -181,7 +179,7 @@ function createPosterClickHandler() {
   }
 
 
-}
+
 
 // function to insert poster object into html display on page- dom- also make it the current poster
  
@@ -200,7 +198,7 @@ function displayPoster(poster) {
   }
 
 console.log();
-createPosterClickHandler()()
+onClickRandomPoster()
 
 //setInterval(()=> {
 //  createPosterClickHandler()()
