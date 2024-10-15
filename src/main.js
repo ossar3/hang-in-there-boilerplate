@@ -103,18 +103,23 @@ var savedPosters = [];
 var currentPoster;
 
 
-var posterImg = document.querySelector('poster-image-url')
-var posterTitle = document.querySelector('poster-title')
-var posterQuote = document.querySelector('poster-quote')
-var savePosterBtn = document.querySelector('save-poster')
-var showSavedBtn = document.querySelector('show-saved')
-var randomBtn = document.querySelector('show-random')
-var customBtn = document.querySelector('show-form')
+var posterImg = document.querySelector('.poster-img')
+var posterTitle = document.querySelector('.poster-title')
+var posterQuote = document.querySelector('.poster-quote')
+var savePosterBtn = document.querySelector('.save-poster')
+var showSavedBtn = document.querySelector('.show-saved')
+var randomBtn = document.querySelector('.show-random')
+var customBtn = document.querySelector('.show-form')
+
 // event listeners go here 👇
 
 //savePosterBtn.addEventListener('click', )
 //showSavedBtn.addEventListener
-randomBtn.addEventListener('click', createPoster(getRandomIndex(images), getRandomIndex(titles), getRandomIndex(quotes)))
+
+
+randomBtn.addEventListener('click',  createPosterClickHandler(randomImage(), randomTitle(), randomQuote()))
+//display poster
+
 
 //adding posters to the saved poster array? how
 
@@ -125,13 +130,35 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function createPoster(imageURL, title, quote) {
-  return {
-    id: Date.now(), 
-    imageURL: imageURL, 
-    title: title, 
-    quote: quote}
+function randomImage() {
+  return images[getRandomIndex(images)]
 }
+
+function randomTitle() {
+  return titles[getRandomIndex(titles)]
+}
+
+function randomQuote() {
+  return quotes[getRandomIndex(quotes)]
+}
+
+
+function createPosterClickHandler() {
+  return () => {
+
+    const posterDetails = {
+      id: Date.now(), 
+      imageURL: randomImage(), 
+      title: randomTitle(), 
+      quote: randomQuote()
+    }
+
+    displayPoster(posterDetails);
+  }
+
+
+}
+
 // function to insert poster object into html display on page- dom- also make it the current poster
  
 function savePoster(poster) {
@@ -139,13 +166,18 @@ function savePoster(poster) {
 }
 
 function showSavedPosters() {
-  
+
 }
 
 function displayPoster(poster) {
-    posterImg.innerHTML = poster.imageURL
+    posterImg.src = poster.imageURL
     posterTitle.innerHTML = poster.title
     posterQuote.innerHTML = poster.quote
   }
 
 console.log();
+createPosterClickHandler()()
+
+//setInterval(()=> {
+//  createPosterClickHandler()()
+//}, 750)
