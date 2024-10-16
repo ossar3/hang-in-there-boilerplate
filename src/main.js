@@ -120,6 +120,8 @@ var inputImageUrl = document.getElementById('poster-image-url')
 var inputTitle = document.getElementById('poster-title')
 var inputQuote = document.getElementById('poster-quote')
 
+var savedPostersGrid = document.querySelector('.saved-posters-grid')
+
 var mainSection = document.querySelector('.main-poster')
 
 var savedPostersSection = document.querySelector('.saved-posters')
@@ -136,6 +138,8 @@ customBtn.addEventListener('click', onClickCustomPoster)
 showSavedBtn.addEventListener('click', onClickSavedPosters)
 
 makePosterButton.addEventListener('click', onClickMakePoster)
+
+savePosterBtn.addEventListener('click', onClickSavePoster)
 
 showMainButton.addEventListener('click', onClickShowMainPage)
 backButton.addEventListener('click', onClickShowMainPage)
@@ -172,6 +176,11 @@ function onClickMakePoster(event) {
 function onClickSavedPosters() {
   savedPostersSection.classList.remove('hidden')
   mainSection.classList.add('hidden')
+
+  savedPosters.forEach(poster => {
+    const gridItem = createMiniPoster(poster)
+    savedPostersGrid.appendChild(gridItem)
+  })
 }
 
 function onClickCustomPoster() {
@@ -208,24 +217,38 @@ function onClickRandomPoster() {
       title: randomTitle(), 
       quote: randomQuote()
     }
-
-    displayPoster(posterDetails);
+    currentPoster = posterDetails
+    displayPoster(currentPoster);
   }
 
+function onClickSavePoster() {
+  savedPosters.push(currentPoster)
+}
 
+function createMiniPoster(poster) {
+  const gridItem = document.createElement('div')
+  gridItem.classList.add('mini-poster') 
 
+  const img = document.createElement('img');
+  img.src = poster.imageURL;
+  img.alt = poster.title;
+  img.classList.add('grid-img'); 
+
+  const title = document.createElement('h2');
+  title.innerText = poster.title;
+
+  const quote = document.createElement('h4');
+  quote.innerText = poster.quote;
+
+  gridItem.appendChild(img);
+  gridItem.appendChild(title);
+  gridItem.appendChild(quote);
+
+  return gridItem;
+}
 
 // function to insert poster object into html display on page- dom- also make it the current poster
  
-
-function savePoster(poster) {
-
-}
-
-function showSavedPosters() {
-
-}
-
 function displayPoster(poster) {
     posterImg.src = poster.imageURL
     posterTitle.innerHTML = poster.title
@@ -235,6 +258,3 @@ function displayPoster(poster) {
 console.log();
 onClickRandomPoster()
 
-//setInterval(()=> {
-//  createPosterClickHandler()()
-//}, 750)
